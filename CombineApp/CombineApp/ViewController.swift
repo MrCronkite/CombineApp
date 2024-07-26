@@ -14,6 +14,8 @@ final class ViewController: UIViewController {
     let singleData = "Vlad"
     let data = ["One", "Two", "Three"]
     
+    let viewModel = ViewModel()
+    
     var subscriptions = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -47,6 +49,8 @@ final class ViewController: UIViewController {
             print("Value: \(value)")
         }
         .store(in: &subscriptions)
+        
+        viewModel.requestSomething()
 
     }
 }
