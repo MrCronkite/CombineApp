@@ -53,6 +53,7 @@ final class ViewController: UIViewController {
         
         viewModel.requestSomething()
         just.subscribeInPublisher()
+        just.subscribeData()
     }
 }
 
@@ -65,6 +66,12 @@ final class JustPublishers {
     func subscribeInPublisher() {
         just.sink { value in
             print("Just value: \(value)")
+        }.store(in: &store)
+    }
+    
+    func subscribeData() {
+        data.publisher.sink { value in
+            print("Sequence value: \(value)")
         }.store(in: &store)
     }
 }
