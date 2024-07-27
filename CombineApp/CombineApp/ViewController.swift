@@ -15,6 +15,7 @@ final class ViewController: UIViewController {
     let data = ["One", "Two", "Three"]
     
     let viewModel = ViewModel()
+    let just = JustPublishers()
     
     var subscriptions = Set<AnyCancellable>()
     
@@ -51,7 +52,20 @@ final class ViewController: UIViewController {
         .store(in: &subscriptions)
         
         viewModel.requestSomething()
+        just.subscribeInPublisher()
+    }
+}
 
+final class JustPublishers {
+    let data = ["One", "Two", "Three"]
+    var store: Set<AnyCancellable> = []
+    
+    let just = Just("First Message")
+    
+    func subscribeInPublisher() {
+        just.sink { value in
+            print("Just value: \(value)")
+        }.store(in: &store)
     }
 }
 
