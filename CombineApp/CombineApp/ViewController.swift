@@ -32,6 +32,9 @@ final class ViewController: UIViewController {
     let futurePublishers = FuturePublishers()
     let defferedPublishers = DefferedPublishers()
     
+    let passthrought = PassthroughSubject<String, Never>()
+    let currentValue = CurrentValueSubject<String, Never>("Initial")
+    
     var subscriptions = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -100,5 +103,12 @@ final class ViewController: UIViewController {
                 self?.photoImageView.image = image
             }
         }
+        
+        passthrought.sink { value in
+            print("Pass value \(value)")
+        }.store(in: &subscriptions)
+        
+        passthrought.send("First")
+        passthrought.send("Second")
     }
 }
