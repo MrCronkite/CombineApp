@@ -89,10 +89,16 @@ final class ViewController: UIViewController {
             case .failure(let someError):
                 print("Error :\(someError)")
             }
-        } receiveValue: { [weak self] image in
+        } receiveValue: { image in
+            
+        }.store(in: &subscriptions)
+        
+        viewModel.loadData(
+            urlString: "https://cdn.prod.website-files.com/63fda77e5fd49598bbf00892/6416e5ccdbc0d68da0d7727d_swift.jpg"
+        ) { [weak self] image in
             DispatchQueue.main.async {
                 self?.photoImageView.image = image
             }
-        }.store(in: &subscriptions)
+        }
     }
 }

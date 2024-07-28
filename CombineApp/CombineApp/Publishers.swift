@@ -68,4 +68,6 @@ final class DefferedPublishers {
             }.resume()
         }
     }
+    
+    let empty = Empty<String, CombineError>()
 }
