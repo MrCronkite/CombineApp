@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84894CFC2C597ED700E60E44 /* FibanachiPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84894CFB2C597ED700E60E44 /* FibanachiPublisher.swift */; };
 		849EA3E32C5415AF008F9528 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EA3E22C5415AF008F9528 /* Network.swift */; };
 		849EA3E52C541645008F9528 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849EA3E42C541645008F9528 /* ViewModel.swift */; };
 		849EA3E72C558FD6008F9528 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849EA3E62C558FD6008F9528 /* ViewController.xib */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84894CFB2C597ED700E60E44 /* FibanachiPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FibanachiPublisher.swift; sourceTree = "<group>"; };
 		849EA3E22C5415AF008F9528 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		849EA3E42C541645008F9528 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		849EA3E62C558FD6008F9528 /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				849EA3E42C541645008F9528 /* ViewModel.swift */,
 				849EA3E62C558FD6008F9528 /* ViewController.xib */,
 				849EA3E82C56375D008F9528 /* Publishers.swift */,
+				84894CFB2C597ED700E60E44 /* FibanachiPublisher.swift */,
 			);
 			path = CombineApp;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				849EA3E92C56375D008F9528 /* Publishers.swift in Sources */,
 				849EA3E52C541645008F9528 /* ViewModel.swift in Sources */,
 				84ADD7162C52D13B0082F164 /* ViewController.swift in Sources */,
+				84894CFC2C597ED700E60E44 /* FibanachiPublisher.swift in Sources */,
 				84ADD7122C52D13B0082F164 /* AppDelegate.swift in Sources */,
 				849EA3E32C5415AF008F9528 /* Network.swift in Sources */,
 				84ADD7142C52D13B0082F164 /* SceneDelegate.swift in Sources */,
