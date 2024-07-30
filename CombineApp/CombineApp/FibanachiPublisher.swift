@@ -28,7 +28,26 @@ class FibanachiSubscription<S: Subscriber>: Subscription where S.Input == Int {
     }
     
     func request(_ demand: Subscribers.Demand) {
-        <#code#>
+        guard demand > .none else {
+            subscriber?.receive(completion: .finished)
+            return
+        }
+        
+        var count = demand
+        count -= .max(1)
+        subscriber?.receive(0)
+        
+        if count == .none {
+            subscriber?.receive(completion: .finished)
+            return
+        }
+        
+        count -= .max(1)
+        subscriber?.receive(1)
+        if count == .none {
+            subscriber?.receive(completion: .finished)
+            return
+        }
     }
     
     func cancel() {
