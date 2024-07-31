@@ -22,31 +22,33 @@ struct FibanachiPublisher: Publisher {
 class FibanachiSubscription<S: Subscriber>: Subscription where S.Input == Int {
     
     private var subscriber: S?
+    private var current = 0
+    private var next = 1
     
     init(subscriber: S) {
         self.subscriber = subscriber
     }
     
     func request(_ demand: Subscribers.Demand) {
-        guard demand > .none else {
-            subscriber?.receive(completion: .finished)
-            return
+        var remainingDemand = demand
+        
+        while remainingDemand > .none {
+            guard let subscriber = subscriber else { return }
+            
+            // Отправляем текущее значение подписчику
+            let nextDemand = subscriber.receive(current)
+            remainingDemand -= 1
+            remainingDemand += nextDemand
+            
+            // Вычисляем следующее число Фибоначчи
+            let newNext = current + next
+            current = next
+            next = newNext
         }
         
-        var count = demand
-        count -= .max(1)
-        subscriber?.receive(0)
-        
-        if count == .none {
+        // Если больше нет спроса, завершаем подписку
+        if remainingDemand == .none {
             subscriber?.receive(completion: .finished)
-            return
-        }
-        
-        count -= .max(1)
-        subscriber?.receive(1)
-        if count == .none {
-            subscriber?.receive(completion: .finished)
-            return
         }
     }
     

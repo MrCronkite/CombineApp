@@ -31,6 +31,7 @@ final class ViewController: UIViewController {
     let just = JustPublishers()
     let futurePublishers = FuturePublishers()
     let defferedPublishers = DefferedPublishers()
+    let fibonacciPublisher = FibanachiPublisher()
     
     let passthrought = PassthroughSubject<String, Never>()
     let currentValue = CurrentValueSubject<String, Never>("Initial")
@@ -110,5 +111,13 @@ final class ViewController: UIViewController {
         
         passthrought.send("First")
         passthrought.send("Second")
+        
+        let cancellable = fibonacciPublisher
+            .prefix(10)
+            .sink(receiveCompletion: { completion in
+                print("Completed: \(completion)")
+            }, receiveValue: { value in
+                print("Fibonacci: \(value)")
+            })
     }
 }
