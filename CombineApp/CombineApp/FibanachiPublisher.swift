@@ -7,19 +7,23 @@
 
 import Combine
 
+enum FibanachiError: Error {
+    case intOverflow
+}
+
 struct FibanachiPublisher: Publisher {
     
     typealias Output = Int
-    typealias Failure = Never
+    typealias Failure = FibanachiError
     
-    func receive<S>(subscriber: S) where S : Subscriber, Never == S.Failure, Int == S.Input {
+    func receive<S>(subscriber: S) where S : Subscriber, FibanachiError == S.Failure, Int == S.Input {
         let subscription = FibanachiSubscription(subscriber: subscriber)
         subscriber.receive(subscription: subscription)
     }
 }
 
 
-class FibanachiSubscription<S: Subscriber>: Subscription where S.Input == Int {
+class FibanachiSubscription<S: Subscriber>: Subscription where S.Input == Int, FibanachiError == S.Failure {
     
     private var subscriber: S?
     private var current = 0
@@ -41,9 +45,14 @@ class FibanachiSubscription<S: Subscriber>: Subscription where S.Input == Int {
             remainingDemand += nextDemand
             
             // Вычисляем следующее число Фибоначчи
-            let newNext = current + next
-            current = next
-            next = newNext
+            let newNext = current.addingReportingOverflow(next)
+            if newNext.overflow {
+                subscriber.receive(completion: .failure(FibanachiError.intOverflow))
+                return
+            } else {
+                current = next
+                next = newNext.partialValue
+            }
         }
         
         // Если больше нет спроса, завершаем подписку

@@ -112,12 +112,12 @@ final class ViewController: UIViewController {
         passthrought.send("First")
         passthrought.send("Second")
         
-        let cancellable = fibonacciPublisher
+        fibonacciPublisher
             .prefix(10)
             .sink(receiveCompletion: { completion in
                 print("Completed: \(completion)")
             }, receiveValue: { value in
                 print("Fibonacci: \(value)")
-            })
+            }).store(in: &subscriptions)
     }
 }
